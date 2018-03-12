@@ -3,6 +3,7 @@ package com.example.issuser.mvpdemo;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements MvpView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Log.e("yzh","1111111");
 
         tv_s=(TextView)findViewById(R.id.tv_s);
         tv_s.setOnClickListener(new View.OnClickListener() {
