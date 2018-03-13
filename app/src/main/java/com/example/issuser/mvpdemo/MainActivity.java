@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements MvpView {
 
     ProgressDialog progressDialog;
     MvpPresenter presenter;
-    MvpPresenter2 presenter2;
+//    MvpPresenter2 presenter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,14 +57,14 @@ public class MainActivity extends AppCompatActivity implements MvpView {
         presenter = new MvpPresenter(this);
 
         //presenter2绑定view
-        presenter2=new MvpPresenter2();
-        presenter2.attachView(this);
+//        presenter2=new MvpPresenter2();
+//        presenter2.attachView(this);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter2.detachView();
+//        presenter2.detachView();
     }
 
     @Override
