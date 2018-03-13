@@ -34,4 +34,22 @@ public class MvpModel {
     }
 
 
+    public static void getNetData2(final Action action, final BaseCallBack<String> callBack){
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (action){
+                    case NORMAL:
+                        callBack.onSuccess("请求网络数据成功");
+                        break;
+                    case FAILUER:
+                        callBack.onFailure("网络数据解析失败");
+                        break;
+                    case ERROR:
+                        callBack.onError();
+                }
+            }
+        },2000);
+    }
+
 }
