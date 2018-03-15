@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements MvpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.e("yzh","1111111");
+//        Log.e("yzh","12222222222222");
 
         tv_s=(TextView)findViewById(R.id.tv_s);
         tv_s.setOnClickListener(new View.OnClickListener() {
