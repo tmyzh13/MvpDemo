@@ -12,7 +12,9 @@
         <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".daggertest.DaggerTestActivity">
+        <activity android:name=".daggertest.DaggerTestActivity"/>
+        <activity android:name=".daggertest.DaggerTest2Activity"/>
+        <activity android:name=".daggertest.DaggerTest3Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
