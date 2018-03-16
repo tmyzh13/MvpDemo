@@ -11,8 +11,9 @@ import dagger.Provides;
 @Module //提供依赖对象的实例
 public class MainModule {
 
-    @Provides
+    @Provides //关键字，标明该方法提供依赖的对象
     Person providePerson(){
+        //提供Person对象
         return new Person();
     }
 
