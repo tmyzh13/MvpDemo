@@ -18,11 +18,15 @@ public class SecondActivity  extends BaseActivity implements MvpView2{
     private TextView tv_f;
     private TextView tv_e;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
         tv_s=(TextView)findViewById(R.id.tv_s);
         tv_s.setOnClickListener(new View.OnClickListener() {
             @Override

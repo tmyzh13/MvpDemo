@@ -22,11 +22,15 @@ public class DaggerTest2Activity extends BaseActivity {
     Person person2;
 
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dagger);
 
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_dagger;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
         //构造桥梁对象
         MainComponent component =DaggerMainComponent.builder().mainModule(new MainModule(this)).build();
         //注入

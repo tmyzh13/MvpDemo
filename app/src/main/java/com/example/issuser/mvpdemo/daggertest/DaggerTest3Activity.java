@@ -27,11 +27,16 @@ public class DaggerTest3Activity extends BaseActivity {
     @Inject
     Person3 person2;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dagger);
 
+
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_dagger;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
         AppComponent appCom =DaggerAppComponent.builder().appModule(new AppModule(this)).build();
         DaggerActivityComponent.builder()
                 .appComponent(appCom)

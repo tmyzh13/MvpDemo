@@ -18,6 +18,8 @@ public abstract class BaseActivity extends Activity implements BaseView {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getLayoutId());
+        init(savedInstanceState);
         mProgressDialog=new ProgressDialog(this);
         mProgressDialog.setCancelable(false);
     }
@@ -50,4 +52,16 @@ public abstract class BaseActivity extends Activity implements BaseView {
     public Context getContext() {
         return BaseActivity.this;
     }
+
+    /**
+     * 指定Activity需加载的布局ID,
+     * @return
+     */
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化方法, 类似OnCreate, 仅在此方法中做初始化操作
+     * @param savedInstanceState
+     */
+    protected abstract void init(Bundle savedInstanceState);
 }
