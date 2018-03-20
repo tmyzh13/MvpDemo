@@ -6,6 +6,7 @@ import dagger.Module;
 import dagger.Provides;
 
 /**
+ * 只是注解的话可以省掉module 第三方的一些类需要用到
  * Created by john on 2018/3/18.
  */
 

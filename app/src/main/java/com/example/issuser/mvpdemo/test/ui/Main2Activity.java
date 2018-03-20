@@ -30,7 +30,7 @@ public class Main2Activity extends BaseActivity implements MainFragement.OnFragm
                 .mainModule(new MainModule())
                 .activityModule(new ActivityModule(this)).build();
         mMain2Component.inject(this);
-    }
+     }
 
     public Main2Component getMainComponent(){
         return mMain2Component;

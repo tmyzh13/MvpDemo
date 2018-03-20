@@ -3,6 +3,7 @@ package com.example.issuser.mvpdemo.test.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.example.issuser.mvpdemo.test.App;
 import com.example.issuser.mvpdemo.test.components.AppComponent;
@@ -20,5 +21,12 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+
+    public void showToastMsg(String msg){
+        if(!TextUtils.isEmpty(msg)){
+            getAppComponent().getToastUtil().showToast(msg);
+        }
     }
 }
