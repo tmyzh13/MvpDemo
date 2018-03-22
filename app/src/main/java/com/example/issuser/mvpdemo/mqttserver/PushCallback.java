@@ -30,4 +30,5 @@ public class PushCallback implements MqttCallback {
         //消息分发完成状态
         Log.e("yzh","deliveryComplete--"+iMqttDeliveryToken.isComplete());
     }
+
 }

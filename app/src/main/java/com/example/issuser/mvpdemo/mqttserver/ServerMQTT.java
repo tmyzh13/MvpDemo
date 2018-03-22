@@ -3,6 +3,8 @@ package com.example.issuser.mvpdemo.mqttserver;
 
 import android.util.Log;
 
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttDeliveryToken;
@@ -54,6 +56,18 @@ public class ServerMQTT {
             e.printStackTrace();
         }
     }
+
+//    IMqttActionListener listener =new IMqttActionListener() {
+//        @Override
+//        public void onSuccess(IMqttToken iMqttToken) {
+//
+//        }
+//
+//        @Override
+//        public void onFailure(IMqttToken iMqttToken, Throwable throwable) {
+//
+//        }
+//    }
 
     public void publish(MqttTopic topic,MqttMessage message)
             throws MqttPersistenceException,MqttException{

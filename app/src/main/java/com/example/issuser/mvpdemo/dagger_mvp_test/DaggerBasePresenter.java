@@ -1,16 +1,18 @@
-package com.example.issuser.mvpdemo;
+package com.example.issuser.mvpdemo.dagger_mvp_test;
 
 /**
- * Created by issuser on 2018/3/13.
+ * Created by issuser on 2018/3/22.
  */
 
-public class BasePresenter<V extends BaseView> {
+public abstract class DaggerBasePresenter<V extends DaggerBaseView> {
 
     private V mvpView;
 
     public void attachView(V mvpView){
         this.mvpView=mvpView;
     }
+
+
 
     public void detachView(){
         this.mvpView=null;
@@ -20,9 +22,8 @@ public class BasePresenter<V extends BaseView> {
         return mvpView!=null;
     }
 
-
-
     public V getMvpView(){
         return mvpView;
     }
+    public abstract void onStart();
 }
