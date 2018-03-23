@@ -7,5 +7,9 @@ import com.example.issuser.mvpdemo.BaseView;
  */
 
 public interface YouDaoView extends DaggerBaseView {
+    /**
+     * 加载网络请求回来的数据
+     * @param msg
+     */
     void showNetData(String msg);
 }

@@ -43,4 +43,9 @@ public class YoudaoActivity extends DaggerBaseActivity<YouDaoView,YouDaoPresente
     public void getNetData(){
         presenter.getNetData();
     }
+
+    @OnClick(R.id.tv_get_movie_data)
+    public void getMovieData(){
+        presenter.getMovieData(0,10);
+    }
 }

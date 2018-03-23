@@ -27,7 +27,7 @@ public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends Dagg
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutRes());
-        //将当前activity加载app管理中
+        //将当前activity加入自定义的app管理中
         AppManager.getInstance().addActivity(this);
         presenter=creatPresenter();
         if(presenter!=null){
