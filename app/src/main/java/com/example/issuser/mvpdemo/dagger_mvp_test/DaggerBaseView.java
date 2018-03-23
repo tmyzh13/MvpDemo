@@ -8,8 +8,20 @@ import android.content.Context;
 
 public interface DaggerBaseView {
 
+    /**
+     * 显示网络请求加载转圈
+     */
     void  showLoading();
+
+    /**
+     * 关闭加载转圈
+     */
     void hideloading();
+
+    /**
+     * 吐息一些信息
+     * @param msg
+     */
     void  showToast(String msg);
     void showErr();
     Context getContext();

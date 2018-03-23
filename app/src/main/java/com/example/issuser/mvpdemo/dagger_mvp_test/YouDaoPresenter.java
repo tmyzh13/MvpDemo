@@ -9,7 +9,7 @@ import com.example.issuser.mvpdemo.utils.ApiFactory;
  * Created by issuser on 2018/3/22.
  */
 
-public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView> {
+public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView,String> {
 
     private YoudaoDataModel youdaoDataModel;
 
@@ -20,29 +20,41 @@ public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView> {
     }
 
     public void getNetData(){
+        if(!isViewAttached()){
+            //已经解绑了
+            return;
+        }
         getMvpView().showLoading();
-        youdaoDataModel.requestGetAPI(new BaseCallBack<String>() {
-            @Override
-            public void onSuccess(String data) {
-                getMvpView().showNetData(data);
-            }
+        youdaoDataModel.requestGetAPI(this);
+    }
 
-            @Override
-            public void onFailure(String msg) {
-                getMvpView().showToast(msg);
-                getMvpView().hideloading();
-            }
+    @Override
+    public void onSuccess(String data) {
+        if(isViewAttached()){
+            getMvpView().showNetData(data);
+        }
+    }
 
-            @Override
-            public void onError() {
-                getMvpView().hideloading();
-                getMvpView().showErr();
-            }
+    @Override
+    public void onFailure(String msg) {
+        if(isViewAttached()){
+            getMvpView().showToast(msg);
+            getMvpView().hideloading();
+        }
+    }
 
-            @Override
-            public void onComplete() {
-                getMvpView().hideloading();
-            }
-        });
+    @Override
+    public void onError() {
+        if(isViewAttached()){
+            getMvpView().hideloading();
+            getMvpView().showErr();
+        }
+    }
+
+    @Override
+    public void onComplete() {
+        if(isViewAttached()){
+            getMvpView().hideloading();
+        }
     }
 }

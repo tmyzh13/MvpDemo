@@ -17,21 +17,23 @@ import io.reactivex.schedulers.Schedulers;
  * Created by issuser on 2018/3/22.
  */
 
-public class YoudaoDataModel extends DaggerBaseModel<String> {
+public class YoudaoDataModel implements DaggerBaseModel<String> {
 
     GetDatas getDatas;
 
     @Override
-    protected void getNetApi() {
-        super.getNetApi();
+    public void getNetApi() {
         getDatas= ApiFactory.getInstance().create(GetDatas.class);
     }
 
     @Override
-    protected void requestGetAPI(final BaseCallBack<String> callback) {
+    public void requestGetAPI(final BaseCallBack<String> callback) {
         getDatas.getCall()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
+                //我们对API调用了observeOn(MainThread)之后，线程会跑在主线程上，包括onComplete也是，unsubscribe也在主线程，然后如果这时候调用call.cancel会导致NetworkOnMainThreadException，
+                // 所以一定要在retrofit的API调用ExampleAPI.subscribeOn(io).observeOn(MainThread)之后加一句unsubscribeOn(io)。
+                .unsubscribeOn(Schedulers.io())
                 .subscribe(new Observer<Translation>() {
             @Override
             public void onSubscribe(Disposable d) {
@@ -59,6 +61,6 @@ public class YoudaoDataModel extends DaggerBaseModel<String> {
     }
 
     @Override
-    protected void requestPostAPI( Map params, BaseCallBack<String> callBack) {
+    public void requestPostAPI( Map params, BaseCallBack<String> callBack) {
     }
 }

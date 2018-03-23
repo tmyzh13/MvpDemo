@@ -21,7 +21,6 @@ public class ApiFactory {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-
     }
 
     public Retrofit getRetrofit(){
