@@ -20,7 +20,7 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class ServerMQTT {
 
-    public static final String HOST="tcp://10.28.194.56:61613";
+    public static final String HOST="tcp://169.254.232.176:61681";
     //定义一个主题
     public static final String TOPIC="topic11";
     private static final String clientid="client1";
@@ -33,10 +33,15 @@ public class ServerMQTT {
     private MqttMessage message;
     private ServerMQTT mServer;
 
-    public ServerMQTT()throws MqttException{
+    public ServerMQTT(){
         // MemoryPersistence设置clientid的保存形式，默认为以内存保存
-        client =new MqttClient(HOST,clientid,new MemoryPersistence());
-        connect();
+        try {
+            client =new MqttClient(HOST,clientid,new MemoryPersistence());
+            connect();
+        }catch (Exception e){
+            Log.e("yzh","SERVERMQTT--"+e.toString());
+        }
+
     }
 
     private void connect(){
@@ -53,7 +58,7 @@ public class ServerMQTT {
             client.connect(options);
             topic11=client.getTopic(TOPIC);
         }catch (Exception e){
-            e.printStackTrace();
+            Log.e("yzh","connect--"+e.toString());
         }
     }
 
@@ -70,10 +75,15 @@ public class ServerMQTT {
 //    }
 
     public void publish(MqttTopic topic,MqttMessage message)
-            throws MqttPersistenceException,MqttException{
-        MqttDeliveryToken token =topic.publish(message);
-        token.waitForCompletion();
-        Log.e("yzh","message is published completely!"+token.isComplete());
+            {
+                try{
+                    MqttDeliveryToken token =topic.publish(message);
+                    token.waitForCompletion();
+                    Log.e("yzh","message is published completely!"+token.isComplete());
+                }catch (Exception e){
+                    Log.e("yzh","publish--"+e.toString());
+                }
+
     }
 
     public void sendMessage(String msg){
@@ -83,7 +93,7 @@ public class ServerMQTT {
             message.setRetained(true);
             message.setPayload(msg.getBytes());
             publish(topic11,message);
-        }catch (MqttException e){
+        }catch (Exception e){
             e.printStackTrace();
         }
     }

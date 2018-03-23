@@ -33,11 +33,18 @@ public class MqttActionActivity extends Activity {
         tv_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    mServerMQTT = new ServerMQTT() ;
-                }catch (Exception e){
-                    e.printStackTrace();
-                }
+                Thread thread =new Thread(){
+                    @Override
+                    public void run() {
+                        try{
+                            mServerMQTT = new ServerMQTT() ;
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
+                    }
+                };
+                thread.run();
+
             }
         });
         tv_send.setOnClickListener(new View.OnClickListener() {
