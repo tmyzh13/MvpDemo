@@ -1,12 +1,19 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.example.issuser.mvpdemo.BaseCallBack;
 import com.example.issuser.mvpdemo.dagger_mvp_test.api.GetDatas;
+import com.example.issuser.mvpdemo.dagger_mvp_test.api.GetDoubanMovies;
+import com.example.issuser.mvpdemo.dagger_mvp_test.bean.Movie;
+import com.example.issuser.mvpdemo.dagger_mvp_test.rxtests.MyObserver;
+import com.example.issuser.mvpdemo.dagger_mvp_test.rxtests.ObserverOnNextListener;
 import com.example.issuser.mvpdemo.utils.ApiFactory;
+import com.example.issuser.mvpdemo.utils.ApiMethod;
 
 import java.util.Map;
+import java.util.Observable;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -20,11 +27,15 @@ import io.reactivex.schedulers.Schedulers;
 public class YoudaoDataModel implements DaggerBaseModel<String> {
 
     GetDatas getDatas;
+    GetDoubanMovies getMovies;
 
     @Override
     public void getNetApi() {
         getDatas= ApiFactory.getInstance().create(GetDatas.class);
+        getMovies=ApiFactory.getInstance().create(GetDoubanMovies.class);
     }
+
+
 
     @Override
     public void requestGetAPI(final BaseCallBack<String> callback) {
@@ -60,7 +71,28 @@ public class YoudaoDataModel implements DaggerBaseModel<String> {
         });
     }
 
+    public void getMovies(int start, int count, Context context, final BaseCallBack<Movie> callBack){
+        ApiMethod.ApiSubscribe(getMovies.getMovies(start,count),new MyObserver(context, new ObserverOnNextListener<Movie>() {
+            @Override
+            public void onNext(Movie data) {
+                callBack.onSuccess(data);
+            }
+
+            @Override
+            public void Error(int code) {
+                callBack.onError();
+            }
+
+            @Override
+            public void hideLoading() {
+                callBack.onComplete();
+            }
+        }));
+    }
     @Override
     public void requestPostAPI( Map params, BaseCallBack<String> callBack) {
+
     }
+
+
 }
