@@ -15,9 +15,13 @@ import com.example.issuser.mvpdemo.utils.ApiMethod;
 import java.util.Map;
 import java.util.Observable;
 
+import io.reactivex.ObservableSource;
+import io.reactivex.ObservableTransformer;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 
 /**
@@ -40,11 +44,23 @@ public class YoudaoDataModel implements DaggerBaseModel<String> {
     @Override
     public void requestGetAPI(final BaseCallBack<String> callback) {
         getDatas.getCall()
+                .map(new Function<Translation, Translation>() {
+                    @Override
+                    public Translation apply(Translation translation) throws Exception {
+                        return null;
+                    }
+                })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 //我们对API调用了observeOn(MainThread)之后，线程会跑在主线程上，包括onComplete也是，unsubscribe也在主线程，然后如果这时候调用call.cancel会导致NetworkOnMainThreadException，
                 // 所以一定要在retrofit的API调用ExampleAPI.subscribeOn(io).observeOn(MainThread)之后加一句unsubscribeOn(io)。
                 .unsubscribeOn(Schedulers.io())
+//                .subscribe(new Consumer<Translation>() {
+//                    @Override
+//                    public void accept(Translation translation) throws Exception {
+//
+//                    }
+//                });
                 .subscribe(new Observer<Translation>() {
             @Override
             public void onSubscribe(Disposable d) {
