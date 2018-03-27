@@ -24,12 +24,6 @@ public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
 
     private final String TAG="yzhBaseObserver";
     private final int RESPONSE_CODE_OK=0;
-    private final int RESPONSE_CODE_FAIL=-1;
-    private Context mContext;
-    private static Gson gson =new Gson();
-    private int errorCode;
-    private String errorMsg="未知的错误";
-    private DaggerBaseView view;
     private String tag;
 
     /**
@@ -38,23 +32,23 @@ public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
      */
     protected abstract void onSuccess(T t);
     protected abstract void onFail(ApiException e);
+//    protected abstract void onNetStart();
 
-    public BaseObserver(Context mContext,DaggerBaseView view){
-        this.mContext =mContext;
-        this.view=view;
-        this.tag=this.getClass().getName();
+    public BaseObserver(String tag){
+        this.tag=tag;
         Log.e("yzh","tag=="+tag);
     }
 
     @Override
     public void onSubscribe(Disposable d) {
-        view.showLoading();
+        Log.e("yzh","BaseObserver--onSubscribe");
+//        onNetStart();
         RxActionManagerImpl.getInstance().add(tag, d);
     }
 
     @Override
     public void onNext(BaseData<T> tBaseData) {
-        view.hideloading();
+        Log.e("yzh","baseObserver--onNext");
         RxActionManagerImpl.getInstance().remove(tag);
         //在observable map方法中过滤过一次 这里应该只走到true 两种方式 做一个备选方案
         if(tBaseData.getCode()==RESPONSE_CODE_OK){
@@ -65,7 +59,7 @@ public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
     }
     @Override
     public void onComplete() {
-        view.hideloading();
+        Log.e("yzh","baseObserver--onComplete");
     }
 
     /**
@@ -74,16 +68,18 @@ public abstract class BaseObserver<T> implements Observer<BaseData<T>> {
      */
     @Override
     public void onError(Throwable e) {
+        Log.e("yzh","BaseObserver--onError");
         RxActionManagerImpl.getInstance().remove(tag);
         if(e instanceof ApiException){
             onFail((ApiException) e);
         }else{
+            Log.e("yzh","onError--false");
             onFail(new ApiException(e, ExceptionEngine.UN_KNOWN_ERROR));
         }
     }
 
     /**
-     * 暂时只记录了两个异常 可以对后面其他情况增加
+     * 暂时只记录了两个异常 可以对后面其他情况增加 改方法暂时屏蔽
      */
 //    @Override
 //    public void onError(Throwable e) {

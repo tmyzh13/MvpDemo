@@ -12,7 +12,7 @@ import io.reactivex.functions.Function;
 public class HttpResultFunction implements Function<Throwable,Observable> {
     @Override
     public Observable apply(Throwable throwable) throws Exception {
-        Log.e("yzh","HttpResultFunction:--"+throwable.getMessage());
+        Log.e("yzh","HttpResultFunction:--"+throwable.toString());
         return Observable.error(ExceptionEngine.handleException(throwable));
     }
 }

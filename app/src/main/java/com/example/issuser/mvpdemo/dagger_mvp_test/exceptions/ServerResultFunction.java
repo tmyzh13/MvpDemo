@@ -1,5 +1,7 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test.exceptions;
 
+import android.util.Log;
+
 import com.example.issuser.mvpdemo.dagger_mvp_test.bean.BaseData;
 
 import io.reactivex.functions.Function;
@@ -14,6 +16,7 @@ public class ServerResultFunction<T> implements Function<BaseData<T>,Object> {
     public Object apply(BaseData<T> tBaseData) throws Exception {
         if(tBaseData.getCode()!=0){
             //说明服务器返回的错误情况 如登录的账号密码错误之类
+            Log.e("yzh","服务器报错");
             throw new ServerException(tBaseData.getCode(),tBaseData.getMsg());
         }
         return tBaseData;

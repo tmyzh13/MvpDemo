@@ -1,12 +1,14 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test;
 
 import com.example.issuser.mvpdemo.BaseCallBack;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 /**
+ * 继承了BaseCallBack  现在考虑不一定合适 暂时去掉
  * Created by issuser on 2018/3/22.
  */
 
-public abstract class DaggerBasePresenter<V extends DaggerBaseView,T> implements BaseCallBack<T> {
+public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
 
     private V mvpView;
 
@@ -41,4 +43,8 @@ public abstract class DaggerBasePresenter<V extends DaggerBaseView,T> implements
      * 在页面对象创建完成后调用，可以用来初始化数据层对象
      */
     public abstract void onStart();
+
+    public abstract void setRxActivity(RxActivity activity);
+
+    public abstract void clearRxActivity();
 }

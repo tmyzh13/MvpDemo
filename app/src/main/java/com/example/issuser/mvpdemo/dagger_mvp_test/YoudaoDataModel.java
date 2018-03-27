@@ -6,12 +6,15 @@ import android.util.Log;
 import com.example.issuser.mvpdemo.BaseCallBack;
 import com.example.issuser.mvpdemo.dagger_mvp_test.api.GetDatas;
 import com.example.issuser.mvpdemo.dagger_mvp_test.api.GetDoubanMovies;
+import com.example.issuser.mvpdemo.dagger_mvp_test.api.TestApi;
 import com.example.issuser.mvpdemo.dagger_mvp_test.bean.Movie;
 import com.example.issuser.mvpdemo.dagger_mvp_test.rxtests.MyObserver;
 import com.example.issuser.mvpdemo.dagger_mvp_test.rxtests.ObserverOnNextListener;
 import com.example.issuser.mvpdemo.utils.ApiFactory;
 import com.example.issuser.mvpdemo.utils.ApiMethod;
+import com.trello.rxlifecycle2.components.RxActivity;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
@@ -32,11 +35,13 @@ public class YoudaoDataModel implements DaggerBaseModel<String> {
 
     GetDatas getDatas;
     GetDoubanMovies getMovies;
+    TestApi testApi;
 
     @Override
     public void getNetApi() {
         getDatas= ApiFactory.getInstance().create(GetDatas.class);
         getMovies=ApiFactory.getInstance().create(GetDoubanMovies.class);
+        testApi=ApiFactory.getInstance().create(TestApi.class);
     }
 
 
@@ -109,6 +114,8 @@ public class YoudaoDataModel implements DaggerBaseModel<String> {
     public void requestPostAPI( Map params, BaseCallBack<String> callBack) {
 
     }
+
+
 
 
 }

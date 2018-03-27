@@ -23,15 +23,19 @@
         </activity>
         <activity android:name=".mqttserver.MqttActionActivity"
             >
+
+        </activity>
+        <activity android:name=".dagger_mvp_test.YoudaoActivity">
+
+        </activity>
+        <activity android:name=".dagger_mvp_test.testthrea.TestActivityThree">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dagger_mvp_test.YoudaoActivity">
 
-        </activity>
     </application>
 
 </manifest>
