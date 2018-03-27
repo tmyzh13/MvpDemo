@@ -8,6 +8,7 @@ import com.example.issuser.mvpdemo.dagger_mvp_test.api.GetDatas;
 import com.example.issuser.mvpdemo.dagger_mvp_test.bean.Movie;
 import com.example.issuser.mvpdemo.dagger_mvp_test.bean.Subjects;
 import com.example.issuser.mvpdemo.utils.ApiFactory;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by issuser on 2018/3/22.
  */
 
-public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView,String> {
+public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView> {
 
     private YoudaoDataModel youdaoDataModel;
 
@@ -25,13 +26,43 @@ public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView,String> {
         youdaoDataModel.getNetApi();
     }
 
+    @Override
+    public void setRxActivity(RxActivity activity) {
+
+    }
+
+    @Override
+    public void clearRxActivity() {
+
+    }
+
     public void getNetData(){
         if(!isViewAttached()){
             //已经解绑了
             return;
         }
         getMvpView().showLoading();
-        youdaoDataModel.requestGetAPI(this);
+        youdaoDataModel.requestGetAPI(new BaseCallBack<String>() {
+            @Override
+            public void onSuccess(String data) {
+
+            }
+
+            @Override
+            public void onFailure(String msg) {
+
+            }
+
+            @Override
+            public void onError() {
+
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
     }
 
     public void getMovieData(int start ,int count){
@@ -76,33 +107,33 @@ public class YouDaoPresenter extends DaggerBasePresenter<YouDaoView,String> {
         });
     }
 
-    @Override
-    public void onSuccess(String data) {
-        if(isViewAttached()){
-            getMvpView().showNetData(data);
-        }
-    }
-
-    @Override
-    public void onFailure(String msg) {
-        if(isViewAttached()){
-            getMvpView().showToast(msg);
-            getMvpView().hideloading();
-        }
-    }
-
-    @Override
-    public void onError() {
-        if(isViewAttached()){
-            getMvpView().hideloading();
-            getMvpView().showErr();
-        }
-    }
-
-    @Override
-    public void onComplete() {
-        if(isViewAttached()){
-            getMvpView().hideloading();
-        }
-    }
+//    @Override
+//    public void onSuccess(String data) {
+//        if(isViewAttached()){
+//            getMvpView().showNetData(data);
+//        }
+//    }
+//
+//    @Override
+//    public void onFailure(String msg) {
+//        if(isViewAttached()){
+//            getMvpView().showToast(msg);
+//            getMvpView().hideloading();
+//        }
+//    }
+//
+//    @Override
+//    public void onError() {
+//        if(isViewAttached()){
+//            getMvpView().hideloading();
+//            getMvpView().showErr();
+//        }
+//    }
+//
+//    @Override
+//    public void onComplete() {
+//        if(isViewAttached()){
+//            getMvpView().hideloading();
+//        }
+//    }
 }

@@ -7,15 +7,16 @@ package com.example.issuser.mvpdemo.dagger_mvp_test.bean;
 public class BaseData<T> {
 
     //接口返回的响应 判断成功或者失败
-    private int code;
+    private int retCode;
     //接口返回的错误信息
     private String msg;
 
     //真正的数据
-    private T data;
+//    private T data;
+    private T result;//暂时用这个字段 配合测试接口
 
     public int getCode() {
-        return code;
+        return retCode;
     }
 
     public String getMsg() {
@@ -23,11 +24,11 @@ public class BaseData<T> {
     }
 
     public T getData() {
-        return data;
+        return result;
     }
 
     public void setCode(int code) {
-        this.code = code;
+        this.retCode = code;
     }
 
     public void setMsg(String msg) {
@@ -35,6 +36,6 @@ public class BaseData<T> {
     }
 
     public void setData(T data) {
-        this.data = data;
+        this.result = data;
     }
 }

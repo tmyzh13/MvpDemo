@@ -5,12 +5,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.issuser.mvpdemo.BaseActivity;
 import com.example.issuser.mvpdemo.BasePresenter;
 import com.example.issuser.mvpdemo.BaseView;
 import com.example.issuser.mvpdemo.utils.AppManager;
+import com.trello.rxlifecycle2.components.RxActivity;
 
 import butterknife.ButterKnife;
 
@@ -18,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by issuser on 2018/3/22.
  */
 
-public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends DaggerBasePresenter> extends Activity implements DaggerBaseView {
+public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends DaggerBasePresenter> extends RxActivity implements DaggerBaseView {
 
     protected T presenter;
     private ProgressDialog progressDialog;
@@ -30,9 +32,11 @@ public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends Dagg
         //将当前activity加入自定义的app管理中
         AppManager.getInstance().addActivity(this);
         presenter=creatPresenter();
+        presenter.setRxActivity(this);
         if(presenter!=null){
             //绑定当前页面的view,用于presnter获取数据之后控制activity的变化
             presenter.attachView((V)this);
+
         }
         ButterKnife.bind(this);
         progressDialog=new ProgressDialog(this);
@@ -70,6 +74,7 @@ public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends Dagg
 
     @Override
     public void showLoading() {
+        Log.e("yzh","showLoading");
         progressDialog.show();
     }
 
@@ -98,6 +103,8 @@ public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends Dagg
         super.onDestroy();
         if(presenter!=null){
             presenter.detachView();
+            //清理activity对象
+            presenter.clearRxActivity();
         }
         presenter=null;
         AppManager.getInstance().finishActivity(this);
