@@ -59,7 +59,10 @@ public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
     }
 
     public  void clearRxActivity(){
-        mActivityRef.clear();
-        this.activity=null;
+        if(mActivityRef.get()!=null&&activity!=null){
+            mActivityRef.clear();
+            this.activity=null;
+        }
+
     }
 }

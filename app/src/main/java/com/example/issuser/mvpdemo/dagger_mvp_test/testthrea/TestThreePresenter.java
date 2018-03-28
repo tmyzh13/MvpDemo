@@ -25,13 +25,6 @@ public class TestThreePresenter extends DaggerBasePresenter<TestThreeView> {
 
     private TestThreeModel model;
 
-
-
-
-
-
-
-
     @Override
     public void onStart() {
 

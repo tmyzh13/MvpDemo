@@ -1,6 +1,5 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,9 +7,6 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.issuser.mvpdemo.BaseActivity;
-import com.example.issuser.mvpdemo.BasePresenter;
-import com.example.issuser.mvpdemo.BaseView;
 import com.example.issuser.mvpdemo.utils.AppManager;
 import com.trello.rxlifecycle2.components.RxActivity;
 
