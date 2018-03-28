@@ -1,7 +1,12 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test;
 
+import android.util.Log;
+
 import com.example.issuser.mvpdemo.BaseCallBack;
 import com.trello.rxlifecycle2.components.RxActivity;
+
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 
 /**
  * 继承了BaseCallBack  现在考虑不一定合适 暂时去掉
@@ -44,7 +49,20 @@ public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
      */
     public abstract void onStart();
 
-    public abstract void setRxActivity(RxActivity activity);
+    protected RxActivity activity;
+    private Reference<RxActivity> mActivityRef;
 
-    public abstract void clearRxActivity();
+    public  void setRxActivity(RxActivity activity){
+        mActivityRef=new WeakReference<RxActivity>(activity);
+        this.activity=activity;
+        Log.e("yzh","activity--"+activity.getClass().getName());
+    }
+
+    public  void clearRxActivity(){
+        if(mActivityRef.get()!=null&&activity!=null){
+            mActivityRef.clear();
+            this.activity=null;
+        }
+
+    }
 }

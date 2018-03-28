@@ -1,6 +1,7 @@
 package com.example.issuser.mvpdemo.dagger_mvp_test.testthrea;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.example.issuser.mvpdemo.BaseCallBack;
 import com.example.issuser.mvpdemo.dagger_mvp_test.BaseCallBackNew;
@@ -23,24 +24,6 @@ public class TestThreePresenter extends DaggerBasePresenter<TestThreeView> {
 
 
     private TestThreeModel model;
-
-    private RxActivity activity;
-    private Reference<RxActivity> mActivityRef;
-
-
-
-    @Override
-    public void setRxActivity(RxActivity activity) {
-        mActivityRef=new WeakReference<RxActivity>(activity);
-        this.activity=activity;
-    }
-
-    @Override
-    public void clearRxActivity() {
-        mActivityRef.clear();
-        this.activity=null;
-    }
-
 
     @Override
     public void onStart() {

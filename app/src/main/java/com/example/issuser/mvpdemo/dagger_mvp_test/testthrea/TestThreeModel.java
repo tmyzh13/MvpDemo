@@ -28,8 +28,6 @@ public class TestThreeModel implements DaggerBaseModelNew {
 
     private TestApi api;
 
-
-
     @Override
     public void getNetApi() {
         api= ApiFactory.getInstance().create(TestApi.class);
