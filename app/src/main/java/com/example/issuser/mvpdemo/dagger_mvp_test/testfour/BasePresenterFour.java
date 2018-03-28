@@ -1,21 +1,14 @@
-package com.example.issuser.mvpdemo.dagger_mvp_test;
+package com.example.issuser.mvpdemo.dagger_mvp_test.testfour;
 
-import android.util.Log;
-
-import com.example.issuser.mvpdemo.BaseCallBack;
 import com.trello.rxlifecycle2.components.RxActivity;
 
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
-
 /**
- * 继承了BaseCallBack  现在考虑不一定合适 暂时去掉
- * Created by issuser on 2018/3/22.
+ * Created by issuser on 2018/3/28.
  */
 
-public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
-
+public abstract class BasePresenterFour<M extends BaseModelFour,V extends BaseViewFour> {
     private V mvpView;
+    private M model;
 
     /**
      * 绑定view，在获取网络响应之后通过view传递给activity
@@ -24,7 +17,9 @@ public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
     public void attachView(V mvpView){
         this.mvpView=mvpView;
     }
-
+    public void attachModel(M model){
+        this.model=model;
+    }
     /**
      * 解绑view
      */
@@ -49,17 +44,7 @@ public abstract class DaggerBasePresenter<V extends DaggerBaseView>  {
      */
     public abstract void onStart();
 
-    protected RxActivity activity;
-    private Reference<RxActivity> mActivityRef;
+    public abstract void setRxActivity(RxActivity activity);
 
-    public  void setRxActivity(RxActivity activity){
-        mActivityRef=new WeakReference<RxActivity>(activity);
-        this.activity=activity;
-        Log.e("yzh","activity--"+activity.getClass().getName());
-    }
-
-    public  void clearRxActivity(){
-        mActivityRef.clear();
-        this.activity=null;
-    }
+    public abstract void clearRxActivity();
 }
