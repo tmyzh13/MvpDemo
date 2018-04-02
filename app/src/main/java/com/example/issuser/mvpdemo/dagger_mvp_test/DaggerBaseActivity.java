@@ -28,8 +28,9 @@ public abstract class DaggerBaseActivity<V extends DaggerBaseView,T extends Dagg
         //将当前activity加入自定义的app管理中
         AppManager.getInstance().addActivity(this);
         presenter=creatPresenter();
-        presenter.setRxActivity(this);
+
         if(presenter!=null){
+            presenter.setRxActivity(this);
             //绑定当前页面的view,用于presnter获取数据之后控制activity的变化
             presenter.attachView((V)this);
 

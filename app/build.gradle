@@ -5,7 +5,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.issuser.mvpdemo"
-        minSdkVersion 15
+        minSdkVersion 24
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -20,6 +20,17 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '24.1.0'
+                }
+            }
         }
     }
 }
@@ -51,4 +62,7 @@ dependencies {
 
     compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.1.0'
     compile 'com.trello.rxlifecycle2:rxlifecycle-navi:2.1.0'
+
+    //recyclevie依赖
+    compile 'com.android.support:recyclerview-v7:24.2.1'
 }

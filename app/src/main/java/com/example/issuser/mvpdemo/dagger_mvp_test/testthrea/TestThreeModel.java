@@ -21,10 +21,17 @@ import java.util.Map;
 import io.reactivex.Observable;
 
 /**
- * Created by issuser on 2018/3/27.
+ * Created by issusepublic TestApi getApi(){
+ return this.api;
+ }
+ public void setApi(TestApi api){
+ this.api=api;
+ }r on 2018/3/27.
  */
 
 public class TestThreeModel implements DaggerBaseModelNew {
+
+
 
     private TestApi api;
 
