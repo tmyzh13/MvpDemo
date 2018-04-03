@@ -25,7 +25,7 @@ public class BaseAdapter<T> extends RecyclerView.Adapter<BaseViewHolder> {
         this(dataList, delegate, null);
     }
     public BaseAdapter(List<T> dataList, BaseDelegate delegate, OnItemClickListener listener) {
-        dataList=new ArrayList<>();
+        this.dataList=new ArrayList<>();
         this.delegate = delegate;
         this.listener = listener;
     }

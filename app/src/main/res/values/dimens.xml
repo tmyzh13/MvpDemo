@@ -3,4 +3,15 @@
     <dimen name="padding">10dp</dimen>
     <dimen name="sectioned_top">27dp</dimen>
     <dimen name="sectioned_alignBottom">7dp</dimen>
+
+    <dimen name="size_10_dp">10dp</dimen>
+    <dimen name="size_20_dp">20dp</dimen>
+    <dimen name="size_40_dp">40dp</dimen>
+    <dimen name="size_60_dp">60dp</dimen>
+    <dimen name="size_120_dp">120dp</dimen>
+
+
+    <!--text size-->
+
+    <dimen name="text_size_16sp">16sp</dimen>
 </resources>

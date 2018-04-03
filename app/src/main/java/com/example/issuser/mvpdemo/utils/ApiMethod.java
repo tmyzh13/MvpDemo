@@ -1,6 +1,7 @@
 package com.example.issuser.mvpdemo.utils;
 
 import com.example.issuser.mvpdemo.dagger_mvp_test.bean.BaseData;
+
 import com.example.issuser.mvpdemo.dagger_mvp_test.exceptions.HttpResultFunction;
 import com.example.issuser.mvpdemo.dagger_mvp_test.exceptions.ServerResultFunction;
 import com.trello.rxlifecycle2.LifecycleProvider;
