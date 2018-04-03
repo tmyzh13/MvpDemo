@@ -14,6 +14,7 @@ import com.example.issuser.mvpdemo.dagger_mvp_test.DaggerBaseActivity;
 import com.example.issuser.mvpdemo.dagger_mvp_test.DaggerBasePresenter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -23,7 +24,7 @@ import butterknife.OnClick;
  */
 
 public class RecycleViewTestActivity extends DaggerBaseActivity {
-
+//    https://blog.csdn.net/say_from_wen/article/details/77184666
 
     @Bind(R.id.recyclerview)
     RecyclerView recyclerView;
@@ -33,12 +34,61 @@ public class RecycleViewTestActivity extends DaggerBaseActivity {
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
     private ArrayList<String> datas;
     private MyAdapter adapter;
+    private List<String> NameBean =new ArrayList<>();
     @Override
     protected void init(Bundle savedInstanceState) {
         datas=new ArrayList<>();
-        datas.add("yzh");
-        datas.add("yhz");
-        datas.add("hzy");
+
+        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
+        datas.add("5");
+        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
+        datas.add("5");
+        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
+        datas.add("5");
+        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
+        datas.add("5");
+        datas.add("1");
+        datas.add("2");
+        datas.add("3");
+        datas.add("4");
+        datas.add("5");
+        NameBean.add("111111111");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("222222222");
+        NameBean.add("333333333");
+        NameBean.add("333333333");
+        NameBean.add("333333333");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
+        NameBean.add("444444444");
 
         linearLayoutManager =new LinearLayoutManager(this);
         gridLayoutManager =new GridLayoutManager(this,2);
@@ -50,6 +100,25 @@ public class RecycleViewTestActivity extends DaggerBaseActivity {
         recyclerView.setHasFixedSize(true);
         //添加分割线
 //        recyclerView.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL_LIST));
+//        recyclerView.addItemDecoration(new PaddingDecoration(getContext()));
+        recyclerView.addItemDecoration(new SectionDecoration(datas,this, new SectionDecoration.DecorationCallback() {
+
+            @Override
+            public String getGroupId(int position) {
+                if(NameBean.get(position)!=null) {
+                    return NameBean.get(position);
+                }
+                return "-1";
+            }
+
+            @Override
+            public String getGroupFirstLine(int position) {
+                if(NameBean.get(position)!=null) {
+                    return NameBean.get(position);
+                }
+                return "";
+            }
+        }));
         adapter =new MyAdapter(datas);
         recyclerView.setAdapter(adapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());

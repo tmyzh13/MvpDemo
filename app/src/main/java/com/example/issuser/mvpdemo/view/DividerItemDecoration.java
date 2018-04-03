@@ -31,7 +31,7 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     public DividerItemDecoration(Context context,int orientation){
         final TypedArray a=context.obtainStyledAttributes(ATTRS);
         mDivider=a.getDrawable(0);
-//        mDivider=context.getDrawable(R.drawable.item_divider);
+        mDivider=context.getDrawable(R.drawable.item_divider);
         a.recycle();
         setOrientation(orientation);
     }
@@ -88,8 +88,9 @@ public class DividerItemDecoration extends RecyclerView.ItemDecoration {
     }
     @Override
     public void getItemOffsets(Rect outRect, int itemPosition, RecyclerView parent) {
+        //rect是每个item的范围
         if (mOrientation == VERTICAL_LIST) {
-            outRect.set(0, 0, 0, mDivider.getIntrinsicHeight());
+            outRect.set(0, 0, 0, 50);
         } else {
             outRect.set(0, 0, mDivider.getIntrinsicWidth(), 0);
         }
